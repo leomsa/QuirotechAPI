@@ -49,7 +49,6 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
          }
      ],
      "address": {
-         "id": 1,
          "address": "santana",
          "houseNumber": "582",
          "details": "Apt 102, BL c",
