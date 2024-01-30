@@ -2,6 +2,9 @@ package com.quirotech.quirotech.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.quirotech.quirotech.entities.Contact;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
