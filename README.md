@@ -32,7 +32,6 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 - **Request Body**: Patient object (JSON)
  ```json
  {
-     "id": "f4a04c5b-40d7-4e0f-b217-59f23d694fba",
      "username": "LeoMSA",
      "name": "Leonardo Machado dos Santos",
      "cpf": "00000000000",
@@ -41,12 +40,10 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
      "password": "$2a$12$VBTpL7swrbrDePcUemFlsOyZo2QZ/2VgeFijtMKZaLrG6PHsxSfAS",
      "contact": [
          {
-             "id": 1,
              "contactValue": "leonardo@gmail.com",
              "contactType": "EMAIL"
          },
          {
-             "id": 2,
              "contactValue": "51985064520",
              "contactType": "PHONE_NUMBER"
          }
