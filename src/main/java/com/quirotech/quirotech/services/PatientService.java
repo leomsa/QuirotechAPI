@@ -73,6 +73,7 @@ public class PatientService {
                 patient.getBornDate(),
                 patient.getGender(),
                 patient.getContact(),
+                patient.getAddress(),
                 patient.getCreatedAt()
         );
         return new ResponseEntity<>(patientDTO, HttpStatus.OK);

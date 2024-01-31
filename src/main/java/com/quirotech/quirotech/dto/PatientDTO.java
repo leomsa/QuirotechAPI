@@ -1,10 +1,8 @@
 package com.quirotech.quirotech.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.quirotech.quirotech.entities.Address;
 import com.quirotech.quirotech.entities.Contact;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,12 +22,14 @@ public class PatientDTO {
 
     private List<Contact> contact;
 
+    private Address address;
+
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "UTC")
     @CreationTimestamp
     private LocalDateTime createdAt;
 
 
-    public PatientDTO(UUID id, String username, String name, String cpf, Date bornDate, char gender, List <Contact> contact, LocalDateTime createdAt) {
+    public PatientDTO(UUID id, String username, String name, String cpf, Date bornDate, char gender, List <Contact> contact, Address address, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -37,6 +37,7 @@ public class PatientDTO {
         this.bornDate = bornDate;
         this.gender = gender;
         this.contact = contact;
+        this.address = address;
         this.createdAt = createdAt;
     }
 }
