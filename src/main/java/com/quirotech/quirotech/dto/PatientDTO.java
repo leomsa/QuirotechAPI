@@ -17,6 +17,7 @@ public class PatientDTO {
     private String username;
     private String name;
     private String cpf;
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "UTC")
     private Date bornDate;
     private Character gender;
 
