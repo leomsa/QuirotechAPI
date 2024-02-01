@@ -26,11 +26,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--&lt;!&ndash;			<groupId>com.h2database</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<artifactId>h2</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<scope>runtime</scope>&ndash;&gt;-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -61,7 +61,6 @@
 			<version>7.0.2.Final</version>
 		</dependency>
     </dependencies>
-
 
 	<build>
 		<plugins>
