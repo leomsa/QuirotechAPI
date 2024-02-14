@@ -35,10 +35,10 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
  {
      "username": "LeoMSA",
      "name": "Leonardo Machado dos Santos",
-     "cpf": "00000000000",
+     "cpf": "03436828065",
      "bornDate": "11-04-1996",
      "gender": "M",
-     "password": "$2a$12$VBTpL7swrbrDePcUemFlsOyZo2QZ/2VgeFijtMKZaLrG6PHsxSfAS",
+     "password": "452563",
      "contact": [
          {
              "contactValue": "leonardo@gmail.com",
