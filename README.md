@@ -6,7 +6,8 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 ## Features
 - **Spring Boot Framework**: Simplifies Java application setup and development.
 - **Spring Data JPA**: Enables easy interaction with the database using Java Persistence API.
-- **H2 In-Memory Database**: Provides temporary storage for patient data during application runtime.
+- **MySQL Database**: Provides persistent storage for patient data.
+- **Docker-compose**: Container for remote access.
 - **RESTful Endpoints**: Well-defined endpoints for managing patients following RESTful design principles.
 - **Input Validation and Error Handling**: Ensures data integrity and provides informative error messages.
 
@@ -14,7 +15,7 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 - Java 17
 - Spring Boot
 - Spring Data JPA
-- H2 Database (in-memory)
+- MySQL Database (Docker-compose container for remote access)
 
 ## Usage
 1. **Clone the Repository**: 
