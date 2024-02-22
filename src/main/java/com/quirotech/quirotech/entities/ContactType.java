@@ -18,13 +18,4 @@ public enum ContactType {
         this.id = id;
         this.name = name;
     }
-
-    public static ContactType fromId(int id) {
-        for (ContactType type : ContactType.values()) {
-            if (type.getId() == id) {
-                return type;
-            }
-        }
-        throw new IllegalArgumentException("Invalid ContactType ID: " + id);
-    }
 }

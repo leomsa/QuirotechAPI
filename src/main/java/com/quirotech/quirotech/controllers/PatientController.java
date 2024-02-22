@@ -41,8 +41,7 @@ public class PatientController {
 
     @CrossOrigin(origins = "**", methods = {RequestMethod.OPTIONS, RequestMethod.DELETE})
     @DeleteMapping(value = "/delete")
-    public void deletePatient(@RequestParam String cpf,
-                              @RequestParam UUID id){
+    public void deletePatient(@RequestParam String cpf){
         patientService.deletePatient(cpf);
     }
 }
