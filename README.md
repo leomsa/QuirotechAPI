@@ -101,7 +101,7 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 
 The frontend for this project is available in a separate repository. You can find the frontend code and related documentation at the following repository:
 
-- **Repository:** [Frontend Repository URL](https://github.com/leomsa/Quirotech_Fe/blob/main/README.md)
+- **Repository:** [Frontend Repository URL](https://github.com/leomsa/Quirotech_Fe)
 
 Please refer to the frontend repository for more details on the frontend implementation, setup instructions, and how to contribute to the frontend development.
 
