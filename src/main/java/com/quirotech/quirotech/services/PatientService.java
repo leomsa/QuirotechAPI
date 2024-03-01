@@ -3,7 +3,6 @@ package com.quirotech.quirotech.services;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.quirotech.quirotech.Utils.CPFvalidator;
 import com.quirotech.quirotech.dto.PatientDTO;
-import com.quirotech.quirotech.entities.Address;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.Patient;
 import com.quirotech.quirotech.repositories.ContactRepository;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,13 +83,13 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public ResponseEntity<Patient> update(String cpf, Patient patient) throws Exception {
+    public ResponseEntity<Patient> update(UUID id, Patient patient) throws Exception {
 
-        Optional<Patient> patientOptional = patientRepository.findPatientByCpf(cpf);
+        Optional<Patient> patientOptional = patientRepository.findById(id);
         if (patientOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Patient existingPatient = patientRepository.findPatientByCpf(cpf).get();
+        Patient existingPatient = patientRepository.findById(id).get();
         existingPatient.setUsername(patient.getUsername());
         existingPatient.setName(patient.getName());
         existingPatient.setCpf(patient.getCpf());
@@ -101,16 +101,8 @@ public class PatientService {
                 .stream()
                 .map(contact -> contactOverwriter(contact, existingPatient))
                 .collect(Collectors.toList());
+
         existingPatient.setContact(contactList);
-
-        Address address = patient.getAddress();
-        existingPatient.getAddress().setAddress(address.getAddress());
-        existingPatient.getAddress().setHouseNumber(address.getHouseNumber());
-        existingPatient.getAddress().setDetails(address.getDetails());
-        existingPatient.getAddress().setCity(address.getCity());
-        existingPatient.getAddress().setDistrict(address.getDistrict());
-        existingPatient.getAddress().setZipCode(address.getZipCode());
-
         Patient updated = patientRepository.save(existingPatient);
         return ResponseEntity.ok().body(updated);
     }
