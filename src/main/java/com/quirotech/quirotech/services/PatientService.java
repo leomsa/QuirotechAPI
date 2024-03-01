@@ -3,6 +3,7 @@ package com.quirotech.quirotech.services;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.quirotech.quirotech.Utils.CPFvalidator;
 import com.quirotech.quirotech.dto.PatientDTO;
+import com.quirotech.quirotech.entities.Address;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.Patient;
 import com.quirotech.quirotech.repositories.ContactRepository;
@@ -101,8 +102,16 @@ public class PatientService {
                 .stream()
                 .map(contact -> contactOverwriter(contact, existingPatient))
                 .collect(Collectors.toList());
-
         existingPatient.setContact(contactList);
+
+        Address address = patient.getAddress();
+        existingPatient.getAddress().setAddress(address.getAddress());
+        existingPatient.getAddress().setHouseNumber(address.getHouseNumber());
+        existingPatient.getAddress().setDetails(address.getDetails());
+        existingPatient.getAddress().setCity(address.getCity());
+        existingPatient.getAddress().setDistrict(address.getDistrict());
+        existingPatient.getAddress().setZipCode(address.getZipCode());
+
         Patient updated = patientRepository.save(existingPatient);
         return ResponseEntity.ok().body(updated);
     }
