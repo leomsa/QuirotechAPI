@@ -25,6 +25,12 @@ public class Contact {
     @JsonIgnore
     private Patient patient;
 
+
+    @ManyToOne
+    @JoinColumn(name = "HelthcareProfessional", referencedColumnName = "id")
+    @JsonIgnore
+    private  HelthcareProfessional helthcareProfessional;
+
     public Contact() {
     }
 
