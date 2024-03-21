@@ -24,9 +24,6 @@ public class HelthcareProfessional {
     @Column(unique = true)
     private String userName;
     private String name;
-    private String specialization;
-    private String licenseNumber;
-    private boolean active;
 
     @Column(unique = true)
     @Length(min = 11, max = 11, message = "CPF must have exactly 11 digits")
@@ -37,6 +34,9 @@ public class HelthcareProfessional {
 
     private Character gender;
     private String password;
+    private String specialization;
+    private String licenseNumber;
+    private boolean active;
 
     @OneToMany(mappedBy = "helthcareProfessional", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contact = new ArrayList<>();
