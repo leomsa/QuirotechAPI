@@ -35,6 +35,7 @@ public class HelthcareProfessional {
     private Character gender;
     private String password;
     private String specialization;
+    @Column(unique = true)
     private String licenseNumber;
     private boolean active;
 
