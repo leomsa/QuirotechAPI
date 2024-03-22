@@ -1,9 +1,9 @@
 package com.quirotech.quirotech.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.quirotech.quirotech.Utils.CPFvalidator;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.HelthcareProfessional;
-import com.quirotech.quirotech.repositories.ContactRepository;
 import com.quirotech.quirotech.repositories.HelthcareProfessionalRepository;
 import com.quirotech.quirotech.repositories.PatientRepository;
 import jakarta.transaction.Transactional;
@@ -18,22 +18,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class HelthcareProfessionalService {
     private final HelthcareProfessionalRepository helthcareProfessionalRepository;
     private final PatientRepository patientRepository;
-    private final ContactRepository contactRepository;
 
 
     @Transactional
     public ResponseEntity createHelthcareProfessional(@RequestBody HelthcareProfessional helthcareProfessional) throws Exception {
-        HelthcareProfessional licenseNumber = this.helthcareProfessionalRepository.findByLicenseNumber(helthcareProfessional.getLicenseNumber());
         HelthcareProfessional user = this.helthcareProfessionalRepository.findByUserName(helthcareProfessional.getUserName());
         HelthcareProfessional cpf = this.helthcareProfessionalRepository.findByCpf(helthcareProfessional.getCpf());
         String validator = helthcareProfessional.getCpf().toString();
+        HelthcareProfessional licenseNumber = this.helthcareProfessionalRepository.findByLicenseNumber(helthcareProfessional.getLicenseNumber());
 
         if (user != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User name already exist!");
+
         } else if (cpf != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF already registerd!");
+
+        } else if (CPFvalidator.validateCPF(validator)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF invalid!");
+
         } else if (licenseNumber != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("License number already registered!");
+
         } else {
             String passwordHashred = BCrypt.withDefaults()
                     .hashToString(12, helthcareProfessional.getPassword().toCharArray());
@@ -46,6 +51,4 @@ public class HelthcareProfessionalService {
             return new ResponseEntity<>(savedHelthcareProfessional, HttpStatus.CREATED);
         }
     }
-
-
 }
