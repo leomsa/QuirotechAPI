@@ -6,7 +6,6 @@ import com.quirotech.quirotech.dto.PatientDTO;
 import com.quirotech.quirotech.entities.Address;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.Patient;
-import com.quirotech.quirotech.repositories.ContactRepository;
 import com.quirotech.quirotech.repositories.PatientRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 public class PatientService {
     private final PatientRepository patientRepository;
 
-    public PatientService(PatientRepository patientRepository, ContactRepository contactRepository) {
+    public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
 
