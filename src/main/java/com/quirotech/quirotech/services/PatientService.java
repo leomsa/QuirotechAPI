@@ -23,11 +23,9 @@ import java.util.stream.Collectors;
 @Service
 public class PatientService {
     private final PatientRepository patientRepository;
-    private final ContactRepository contactRepository;
 
     public PatientService(PatientRepository patientRepository, ContactRepository contactRepository) {
         this.patientRepository = patientRepository;
-        this.contactRepository = contactRepository;
     }
 
     @Transactional
@@ -46,7 +44,6 @@ public class PatientService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF invalid!");
 
         } else {
-
             String passwordHashred = BCrypt.withDefaults()
                     .hashToString(12, patient.getPassword().toCharArray());
             patient.setPassword(passwordHashred);
