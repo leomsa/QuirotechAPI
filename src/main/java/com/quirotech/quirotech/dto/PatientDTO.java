@@ -9,11 +9,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 public class PatientDTO {
-    private UUID id;
+    private Long id;
     private String username;
     private String name;
     private String cpf;
@@ -30,7 +29,7 @@ public class PatientDTO {
     private LocalDateTime createdAt;
 
 
-    public PatientDTO(UUID id, String username, String name, String cpf, Date bornDate, char gender, List <Contact> contact, Address address, LocalDateTime createdAt) {
+    public PatientDTO(Long id, String username, String name, String cpf, Date bornDate, char gender, List <Contact> contact, Address address, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;
         this.name = name;

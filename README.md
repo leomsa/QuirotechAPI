@@ -78,7 +78,7 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 - **URL**: `/patient/update`
 - **Method**: PUT
 - **Description**: Updates an existing patient record by ID.
-- **Request Parameter**: `id` (UUID)
+- **Request Parameter**: `id` (Long)
 - **Request Body**: Patient object (JSON)
  ```json
  {
@@ -95,7 +95,7 @@ The QuiroTech API is a RESTful web service developed in Java 17 with the Spring 
 - **URL**: `/patient/delete`
 - **Method**: DELETE
 - **Description**: Deletes a patient record by CPF and ID.
-- **Request Parameters**: `cpf` (String), `id` (UUID)
+- **Request Parameters**: `cpf` (String), `id` (Long)
 --------------------------------------------------------------------------------------------------------------------------------------------
 ## Frontend Repository
 

@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-public interface HelthcareProfessionalRepository extends JpaRepository <HelthcareProfessional, UUID> {
+public interface HelthcareProfessionalRepository extends JpaRepository <HelthcareProfessional, Long> {
     HelthcareProfessional findByUserName(String username);
 
     HelthcareProfessional findByLicenseNumber(String licenseNumber);

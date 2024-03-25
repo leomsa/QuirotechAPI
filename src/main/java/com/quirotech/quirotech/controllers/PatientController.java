@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/patient")
@@ -34,7 +33,7 @@ public class PatientController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Patient> update(@RequestParam UUID id,
+    public ResponseEntity<Patient> update(@RequestParam long id,
                                           @RequestBody Patient patient) throws Exception{
         return  patientService.update(id, patient);
     }

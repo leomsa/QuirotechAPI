@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,7 +79,7 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public ResponseEntity<Patient> update(UUID id, Patient patient) throws Exception {
+    public ResponseEntity<Patient> update(long id, Patient patient) throws Exception {
 
         Optional<Patient> patientOptional = patientRepository.findById(id);
         if (patientOptional.isEmpty()) {
