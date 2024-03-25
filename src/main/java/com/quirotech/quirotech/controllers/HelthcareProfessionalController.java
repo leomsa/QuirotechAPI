@@ -1,5 +1,6 @@
 package com.quirotech.quirotech.controllers;
 
+import com.quirotech.quirotech.dto.HelthcareProfessionalDTO;
 import com.quirotech.quirotech.entities.HelthcareProfessional;
 import com.quirotech.quirotech.services.HelthcareProfessionalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class HelthcareProfessionalController {
     @PostMapping("/create")
     public ResponseEntity createHelthcareProfessional(@RequestBody HelthcareProfessional helthcareProfessional) throws Exception {
         return helthcareProfessionalService.createHelthcareProfessional(helthcareProfessional);
+    }
+
+    @GetMapping("/professional")
+    public ResponseEntity<HelthcareProfessionalDTO> helthcareProfessionalByCpf(@RequestParam String cpf){
+        return helthcareProfessionalService.helthcareProfessionalByCpf(cpf);
     }
 }

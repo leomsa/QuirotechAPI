@@ -2,6 +2,7 @@ package com.quirotech.quirotech.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.quirotech.quirotech.Utils.CPFvalidator;
+import com.quirotech.quirotech.dto.HelthcareProfessionalDTO;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.HelthcareProfessional;
 import com.quirotech.quirotech.repositories.HelthcareProfessionalRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Service
@@ -50,5 +52,28 @@ public class HelthcareProfessionalService {
             }
             return new ResponseEntity<>(savedHelthcareProfessional, HttpStatus.CREATED);
         }
+    }
+
+    public ResponseEntity<HelthcareProfessionalDTO> helthcareProfessionalByCpf(@RequestParam String cpf) {
+        HelthcareProfessional helthcareProfessional = this.helthcareProfessionalRepository.findByCpf(cpf);
+
+        if(helthcareProfessional == null || !helthcareProfessionalRepository.existsByCpf(cpf)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        HelthcareProfessionalDTO helthcareProfessionalDTO = new HelthcareProfessionalDTO(
+                helthcareProfessional.getId(),
+                helthcareProfessional.getUserName(),
+                helthcareProfessional.getName(),
+                helthcareProfessional.getCpf(),
+                helthcareProfessional.getBornDate(),
+                helthcareProfessional.getGender(),
+                helthcareProfessional.getSpecialization(),
+                helthcareProfessional.getLicenseNumber(),
+                helthcareProfessional.isActive(),
+                helthcareProfessional.getContact(),
+                helthcareProfessional.getAddress(),
+                helthcareProfessional.getCreatedAt()
+        );
+        return new ResponseEntity<>(helthcareProfessionalDTO, HttpStatus.OK);
     }
 }
