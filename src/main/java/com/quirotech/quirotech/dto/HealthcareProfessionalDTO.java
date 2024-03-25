@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class HelthcareProfessionalDTO {
+public class HealthcareProfessionalDTO {
     private Long id;
     private String username;
     private String name;
@@ -30,9 +30,9 @@ public class HelthcareProfessionalDTO {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public HelthcareProfessionalDTO(Long id, String username, String name, String cpf, Date bornDate, Character gender,
-                                    String specialization, String licenseNumber, boolean active, List<Contact> contact,
-                                    Address address, LocalDateTime createdAt) {
+    public HealthcareProfessionalDTO(Long id, String username, String name, String cpf, Date bornDate, Character gender,
+                                     String specialization, String licenseNumber, boolean active, List<Contact> contact,
+                                     Address address, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;
         this.name = name;

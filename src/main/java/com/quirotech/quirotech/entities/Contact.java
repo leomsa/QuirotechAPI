@@ -29,7 +29,7 @@ public class Contact {
     @ManyToOne
     @JoinColumn(name = "HelthcareProfessional", referencedColumnName = "id")
     @JsonIgnore
-    private  HelthcareProfessional helthcareProfessional;
+    private HelathcareProfessional helathcareProfessional;
 
     public Contact() {
     }

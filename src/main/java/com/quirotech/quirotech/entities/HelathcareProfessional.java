@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "HelthcareProfessional")
-public class HelthcareProfessional {
+public class HelathcareProfessional {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class HelthcareProfessional {
     private String licenseNumber;
     private boolean active;
 
-    @OneToMany(mappedBy = "helthcareProfessional", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "helathcareProfessional", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contact = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
