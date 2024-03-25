@@ -23,18 +23,25 @@ public class HelthcareProfessionalController {
     }
 
     @GetMapping("/professional")
-    public ResponseEntity<HealthcareProfessionalDTO> helthcareProfessionalByCpf(@RequestParam String cpf){
+    public ResponseEntity<HealthcareProfessionalDTO> helthcareProfessionalByCpf(@RequestParam String cpf) {
         return healthcareProfessionalService.helthcareProfessionalByCpf(cpf);
     }
 
     @GetMapping("/allprofessionals")
-    public List<HelathcareProfessional> listAllProfessionals(){
+    public List<HelathcareProfessional> listAllProfessionals() {
         return healthcareProfessionalService.listAllProfessionals();
+    }
+
+
+    @PutMapping("/update")
+    public ResponseEntity<HelathcareProfessional> update(@RequestParam long id,
+                                                         @RequestBody HelathcareProfessional helathcareProfessional) throws Exception {
+        return healthcareProfessionalService.update(id, helathcareProfessional);
     }
 
     @CrossOrigin(origins = "**", methods = {RequestMethod.OPTIONS, RequestMethod.DELETE})
     @DeleteMapping(value = "/delete")
-    public void deleteHealthCareProfessional(@RequestParam String cpf){
+    public void deleteHealthCareProfessional(@RequestParam String cpf) {
         healthcareProfessionalService.deleteHealthCareProfessional(cpf);
     }
 }

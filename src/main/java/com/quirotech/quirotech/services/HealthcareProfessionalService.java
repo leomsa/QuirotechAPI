@@ -3,6 +3,7 @@ package com.quirotech.quirotech.services;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.quirotech.quirotech.Utils.CPFvalidator;
 import com.quirotech.quirotech.dto.HealthcareProfessionalDTO;
+import com.quirotech.quirotech.entities.Address;
 import com.quirotech.quirotech.entities.Contact;
 import com.quirotech.quirotech.entities.HelathcareProfessional;
 import com.quirotech.quirotech.repositories.HealthcareProfessionalRepository;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -59,7 +62,7 @@ public class HealthcareProfessionalService {
     public ResponseEntity<HealthcareProfessionalDTO> helthcareProfessionalByCpf(@RequestParam String cpf) {
         HelathcareProfessional helathcareProfessional = this.healthcareProfessionalRepository.findByCpf(cpf);
 
-        if(helathcareProfessional == null || !healthcareProfessionalRepository.existsByCpf(cpf)){
+        if (helathcareProfessional == null || !healthcareProfessionalRepository.existsByCpf(cpf)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         HealthcareProfessionalDTO healthcareProfessionalDTO = new HealthcareProfessionalDTO(
@@ -79,15 +82,59 @@ public class HealthcareProfessionalService {
         return new ResponseEntity<>(healthcareProfessionalDTO, HttpStatus.OK);
     }
 
-    public List<HelathcareProfessional> listAllProfessionals(){
+    public List<HelathcareProfessional> listAllProfessionals() {
         return healthcareProfessionalRepository.findAll();
     }
 
+    public ResponseEntity<HelathcareProfessional> update(long id, HelathcareProfessional helathcareProfessional) throws Exception {
+        Optional<HelathcareProfessional> healthCarePatientOptional = healthcareProfessionalRepository.findById(id);
+        if (healthCarePatientOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        HelathcareProfessional existingProfessional = healthcareProfessionalRepository.findById(id).get();
+        existingProfessional.setUserName(helathcareProfessional.getUserName());
+        existingProfessional.setName(helathcareProfessional.getName());
+        existingProfessional.setCpf(helathcareProfessional.getCpf());
+        helathcareProfessional.setBornDate(helathcareProfessional.getBornDate());
+        helathcareProfessional.setGender(helathcareProfessional.getGender());
+        helathcareProfessional.setPassword(helathcareProfessional.getPassword());
+        helathcareProfessional.setSpecialization(helathcareProfessional.getSpecialization());
+        helathcareProfessional.setLicenseNumber(helathcareProfessional.getLicenseNumber());
+        helathcareProfessional.setActive(helathcareProfessional.isActive());
+
+        List<Contact> contactList = helathcareProfessional.getContact()
+                .stream()
+                .map(contact ->  contactOverwriterProfessional(contact, existingProfessional))
+                .collect(Collectors.toList());
+        existingProfessional.setContact(contactList);
+
+        Address address = helathcareProfessional.getAddress();
+        existingProfessional.getAddress().setAddress(address.getAddress());
+        existingProfessional.getAddress().setHouseNumber(address.getHouseNumber());
+        existingProfessional.getAddress().setDetails(address.getDetails());
+        existingProfessional.getAddress().setCity(address.getCity());
+        existingProfessional.getAddress().setDistrict(address.getDistrict());
+        existingProfessional.getAddress().setZipCode(address.getZipCode());
+
+        HelathcareProfessional updated = healthcareProfessionalRepository.save(existingProfessional);
+        return ResponseEntity.ok().body(updated);
+    }
+
+    public static Contact contactOverwriterProfessional(Contact newContact, HelathcareProfessional existingProfessional ) {
+
+        return Contact.builder()
+                .id(newContact.getId())
+                .contactValue(newContact.getContactValue())
+                .contactType(newContact.getContactType())
+                .helathcareProfessional(existingProfessional)
+                .build();
+    }
+
     @Transactional
-    public  ResponseEntity<Void> deleteHealthCareProfessional(String cpf){
+    public ResponseEntity<Void> deleteHealthCareProfessional(String cpf) {
         healthcareProfessionalRepository.findByCpf(cpf);
 
-        if(cpf == null || !healthcareProfessionalRepository.existsByCpf(cpf)){
+        if (cpf == null || !healthcareProfessionalRepository.existsByCpf(cpf)) {
             return ResponseEntity.notFound().build();
         }
         healthcareProfessionalRepository.deleteHealthcareProfessionalByCpf(cpf);
