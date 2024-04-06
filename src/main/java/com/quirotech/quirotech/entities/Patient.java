@@ -37,7 +37,7 @@ public class Patient {
     private List<Contact> contact = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_patient_address_id"))
     private Address address;
 
     @CreationTimestamp
